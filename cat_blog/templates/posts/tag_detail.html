@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+ {% load static %}
+{% block content %}
+<h2>Post with "{{ tag.title }}" tag:</h2>
+  {% for post in tag.posts.all %}
+    <p>{{ post.title }}</p>
+    <p><img src="{{ post.image.url }}" width="400" height="200" alt=""></p>
+    <p>{{ post.body }}</p>
+  {% endfor %}
+{% endblock %}

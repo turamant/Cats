@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>Вы увурены, что хотите удалить задачу: "{{ item }}" ?</p>
+
+<form method="POST"  action="">
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" value="Подтвердить">
+</form>
+        <br/>
+        <p><a class="mip" href="{% url 'list' %}">Отменить удаление</a></p>
+{% endblock %}

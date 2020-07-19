@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+ {% load static %}
+{% block content %}
+
+<h2>Post:</h2>
+<i>Tag</i>:
+  {% for tag in post.tags.all %}
+    <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+  {% endfor %}
+
+<p><i>Заголовок:</i> {{ post.title }}</p>
+<p><img src="{{ post.image.url }}" width="400" height="200" alt=""></p>
+<p><i>Текст:</i> {{ post.body }}</p>
+<p><i>Url:</i> {{ post.url }}</p>
+<a href="{% url 'post_update' url=post.url %}">+ Edit Blog Post</a>
+{% endblock %}
