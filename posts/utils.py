@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
 
-#detail View object
 class ObjectDetailMixin:
     model = None
     template = None
@@ -10,7 +9,6 @@ class ObjectDetailMixin:
         return render(request, self.template,
                       context={self.model.__name__.lower():obj})
 
-#Create Object
 class ObjectCreateMixin:
     model_form = None
     template = None
