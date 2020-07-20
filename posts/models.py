@@ -16,13 +16,13 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'url':self.url})
+        return reverse('post_detail', kwargs={'slug':self.url})
 
     def get_update_url(self):
-        return reverse('post_update', kwargs={'url':self.url})
+        return reverse('post_update', kwargs={'slug':self.url})
 
     def get_delete_url(self):
-        return reverse('post_delete', kwargs={'url':self.url})
+        return reverse('post_delete', kwargs={'slug':self.url})
 
 
 class Tag(models.Model):
@@ -33,10 +33,10 @@ class Tag(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('tag_detail', kwargs={'url': self.url})
+        return reverse('tag_detail', kwargs={'slug': self.url})
 
     def get_update_url(self):
-        return reverse('tag_update', kwargs={'url':self.url})
+        return reverse('tag_update', kwargs={'slug':self.url})
 
     def get_delete_url(self):
-        return reverse('tag_delete', kwargs={'url': self.url})
+        return reverse('tag_delete', kwargs={'slug': self.url})
