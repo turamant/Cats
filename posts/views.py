@@ -13,34 +13,15 @@ from posts.models import Post, Tag
 
 from posts.utils import ObjectDetailMixin, ObjectCreateMixin
 
-#CRUD
-
-#==================READ===================
-
-
-#this is generic
-#class PostListView(ListView):
-#    model = Post
-#    template_name = 'posts/post_list.html'
-
 class PostListView(View):
     def get(self, request):
         posts = Post.objects.all()
         return render(request, 'posts/post_list.html',
                       context={'posts': posts})
 
-
-# this is generics
-#class PostDetailView(DetailView):
-#    model = Post
-#    template_name = 'posts/post_detail.html'
-#    slug_field = 'url'
-
-
 class PostDetailView(ObjectDetailMixin, View):
     model = Post
     template = 'posts/post_detail.html'
-
 
 class TagListView(View):
     def get(self, request):
@@ -52,27 +33,18 @@ class TagDetailView(ObjectDetailMixin, View):
     model = Tag
     template = 'posts/tag_detail.html'
 
-
-
-
-#============ CREATE ===============
 class TagCreate(ObjectCreateMixin, View):
     model_form = TagForm
     template = 'posts/tag_create.html'
-
-
 
 class PostCreate(ObjectCreateMixin, View):
     model_form = PostForm
     template = 'posts/post_create.html'
 
-#======== UPDATE ============
-
 class PostUpdate(UpdateView):
     model = Post
     template_name = 'posts/post_update.html'
     form_class = PostForm
-
 
 class TagUpdate(View):
     def get(self, request, url):
@@ -83,14 +55,11 @@ class TagUpdate(View):
     def post(self, request, url):
         tag = Tag.objects.get(url__iexact=url)
         bound_form = TagForm(request.POST, instance=tag)
-
         if bound_form.is_valid():
             new_tag = bound_form.save()
             return redirect(new_tag)
         return render(request, 'posts/tag_update', context={'form':bound_form, 'tag':tag})
 
-
- #============= DELETE ==========
 class TagDelete(LoginRequiredMixin, DeleteView):
     model = Tag
     success_url = 'tags/'
@@ -102,7 +71,6 @@ def post_delete(request, url):
     post.delete()
     return redirect(reverse('post_list'))
 
-#========== Search ========
 def search(request):
     queryset = Post.objects.all()
     query = request.GET.get('q')
